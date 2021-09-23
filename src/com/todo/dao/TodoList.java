@@ -1,6 +1,5 @@
 package com.todo.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.todo.service.TodoSortByDate;
@@ -39,11 +38,10 @@ public class TodoList {
 	}
 
 	public void listAll() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 		System.out.println("\n정렬된 결과입니다.");
 		for (TodoItem myitem : list) {
 			System.out.println(String.format("[%s] %s | %s",
-					format.format(myitem.getCurrent_date()), myitem.getTitle(), myitem.getDesc()));
+					myitem.getCurrent_date(), myitem.getTitle(), myitem.getDesc()));
 		}
 	}
 	
