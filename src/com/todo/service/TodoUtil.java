@@ -64,7 +64,7 @@ public class TodoUtil {
 
 		System.out.println("새로 추가할 Todo 항목을 입력하세요.");
 		System.out.print("제목 >>> ");
-		String new_title = sc.next().trim();
+		String new_title = sc.nextLine().trim();
 		if (!title.equals(new_title) && list.isDuplicate(new_title)) {
 			System.out.println("이미 존재하는 제목입니다!");
 			return;
