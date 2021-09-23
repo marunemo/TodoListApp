@@ -44,9 +44,11 @@ public class TodoUtil {
 		for (TodoItem item : l.getList()) {
 			if (title.equals(item.getTitle())) {
 				l.deleteItem(item);
-				break;
+				return;
 			}
 		}
+		
+		System.out.println("해당하는 Todo 항목이 존재하지 않습니다.");
 	}
 
 

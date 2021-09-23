@@ -1,5 +1,6 @@
 package com.todo;
 
+import java.io.File;
 import java.util.Scanner;
 
 import com.todo.dao.TodoList;
@@ -14,6 +15,9 @@ public class TodoMain {
 		TodoList l = new TodoList();
 		boolean isList = false;
 		boolean quit = false;
+		
+		if(new File("todolist.txt").exists())
+			TodoUtil.loadList(l, "todolist.txt");
 		Menu.displaymenu();
 		do {
 			Menu.prompt();
@@ -55,6 +59,7 @@ public class TodoMain {
 
 			case "exit":
 				quit = true;
+				TodoUtil.saveList(l, "todolist.txt");
 				break;
 				
 			case "help":
