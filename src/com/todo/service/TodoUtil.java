@@ -72,7 +72,7 @@ public class TodoUtil {
 			return;
 		}
 		System.out.print("내용 >>> ");
-		String new_description = sc.next().trim();
+		String new_description = sc.nextLine().trim();
 		for (TodoItem item : list.getList()) {
 			if (item.getTitle().equals(title)) {
 				list.editItem(item, new TodoItem(new_title, new_description));
