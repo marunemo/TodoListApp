@@ -1,5 +1,10 @@
 package com.todo.service;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -80,6 +85,45 @@ public class TodoUtil {
 		for (TodoItem item : l.getList()) {
 			System.out.println(String.format("[%s] %s | %s",
 					format.format(item.getCurrent_date()), item.getTitle(), item.getDesc()));
+		}
+	}
+	
+	public static void saveList(TodoList l, String filename) {
+		try {
+			FileWriter writer = new FileWriter(filename);
+			SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+			
+			for (TodoItem item : l.getList())
+				writer.write(item.toSaveString());
+			
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void loadList(TodoList l, String filename) {
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(filename));
+			SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+			
+			String readStr = reader.readLine();
+			while(readStr != null) {
+				StringTokenizer strtok = new StringTokenizer(readStr, "##");
+				String title = strtok.nextToken();
+				String desc = strtok.nextToken();
+				Date date = format.parse(strtok.nextToken());
+				
+				TodoItem item = new TodoItem(title, desc);
+				item.setCurrent_date(date);
+				l.addItem(item);
+				
+				readStr = reader.readLine();
+			}
+			
+			reader.close();
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
 		}
 	}
 }
