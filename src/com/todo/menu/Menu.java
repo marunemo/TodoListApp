@@ -14,6 +14,6 @@ public class Menu {
     }
     
     public static void prompt() {
-    	System.out.print("\n 명령어 입력하세요 >>> ");
+    	System.out.print("\n 명령어를 입력하세요 >>> ");
     }
 }

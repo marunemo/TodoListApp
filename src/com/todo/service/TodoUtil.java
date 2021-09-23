@@ -17,7 +17,7 @@ public class TodoUtil {
 		System.out.print("제목 >>> ");
 		title = sc.nextLine();
 		if (list.isDuplicate(title)) {
-			System.out.printf("이미 존재하는 제목입니다!");
+			System.out.println("이미 존재하는 제목입니다!");
 			return;
 		}
 
@@ -52,23 +52,23 @@ public class TodoUtil {
 		System.out.println("변경할 Todo 항목의 제목을 입력하세요.");
 		System.out.print("제목 >>> ");
 		String title = sc.nextLine();
-		if (list.isDuplicate(title)) {
-			System.out.printf("이미 존재하는 제목입니다!");
+		if (!list.isDuplicate(title)) {
+			System.out.println("존재하지 않는 제목입니다!");
 			return;
 		}
 
 		System.out.println("새로 추가할 Todo 항목을 입력하세요.");
 		System.out.print("제목 >>> ");
 		String new_title = sc.next().trim();
-		if (list.isDuplicate(new_title)) {
-			System.out.printf("이미 존재하는 제목입니다!");
+		if (!title.equals(new_title) && list.isDuplicate(new_title)) {
+			System.out.println("이미 존재하는 제목입니다!");
 			return;
 		}
 		System.out.print("내용 >>> ");
 		String new_description = sc.next().trim();
 		for (TodoItem item : list.getList()) {
 			if (item.getTitle().equals(title)) {
-				item = new TodoItem(new_title, new_description);
+				list.editItem(item, new TodoItem(new_title, new_description));
 				System.out.println("항목이 변경되었습니다.");
 			}
 		}
@@ -76,9 +76,9 @@ public class TodoUtil {
 	}
 
 	public static void listAll(TodoList l) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 		for (TodoItem item : l.getList()) {
-			System.out.println(String.format("[%s] %s: %s",
+			System.out.println(String.format("[%s] %s | %s",
 					format.format(item.getCurrent_date()), item.getTitle(), item.getDesc()));
 		}
 	}

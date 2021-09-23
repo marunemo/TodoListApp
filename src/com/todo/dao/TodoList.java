@@ -20,10 +20,12 @@ public class TodoList {
 		list.remove(t);
 	}
 
-	void editItem(TodoItem t, TodoItem updated) {
+	public void editItem(TodoItem t, TodoItem updated) {
 		int index = list.indexOf(t);
+		if(index == -1) return;
+		
 		list.remove(index);
-		list.add(updated);
+		list.add(index, updated);
 	}
 
 	public ArrayList<TodoItem> getList() {
