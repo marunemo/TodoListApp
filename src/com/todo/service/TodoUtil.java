@@ -93,7 +93,6 @@ public class TodoUtil {
 	public static void saveList(TodoList l, String filename) {
 		try {
 			FileWriter writer = new FileWriter(filename);
-			SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 			
 			for (TodoItem item : l.getList())
 				writer.write(item.toSaveString());
