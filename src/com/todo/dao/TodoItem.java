@@ -11,9 +11,11 @@ public class TodoItem {
     private String due_date;
     private SimpleDateFormat date_format = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
 
-    public TodoItem(String title, String desc){
+    public TodoItem(String title, String desc, String category, String due_date){
         this.title=title;
         this.desc=desc;
+        this.category = category;
+        this.due_date = due_date;
         this.current_date=date_format.format(new Date());
     }
     
@@ -62,6 +64,6 @@ public class TodoItem {
 	}
 
 	public String toSaveString() {
-    	return title + "##" + desc + "##" + current_date + '\n';
+    	return title + "##" + desc + "##" + current_date + "##" + category + "##" + due_date + '\n';
     }
 }

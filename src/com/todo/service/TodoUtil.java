@@ -13,7 +13,7 @@ public class TodoUtil {
 	
 	public static void createItem(TodoList list) {
 		
-		String title, desc;
+		String title, desc, category, due_date;
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("추가할 Todo 항목을 입력하세요.");
@@ -26,8 +26,14 @@ public class TodoUtil {
 
 		System.out.print("내용 >>> ");
 		desc = sc.nextLine();
+		
+		System.out.print("카테고리 >>> ");
+		category = sc.nextLine();
+		
+		System.out.print("마감일 >>> ");
+		due_date = sc.nextLine();
 
-		TodoItem t = new TodoItem(title, desc);
+		TodoItem t = new TodoItem(title, desc, category, due_date);
 		list.addItem(t);
 	}
 
@@ -63,17 +69,21 @@ public class TodoUtil {
 		}
 
 		System.out.println("새로 추가할 Todo 항목을 입력하세요.");
-		System.out.print("제목 >>> ");
+		System.out.print("새 제목 >>> ");
 		String new_title = sc.nextLine().trim();
 		if (!title.equals(new_title) && list.isDuplicate(new_title)) {
 			System.out.println("이미 존재하는 제목입니다!");
 			return;
 		}
-		System.out.print("내용 >>> ");
+		System.out.print("새 내용 >>> ");
 		String new_description = sc.nextLine().trim();
+		System.out.print("새 카테고리 >>> ");
+		String new_category = sc.nextLine().trim();
+		System.out.print("새 마감일 >>> ");
+		String new_due_date = sc.nextLine().trim();
 		for (TodoItem item : list.getList()) {
 			if (item.getTitle().equals(title)) {
-				list.editItem(item, new TodoItem(new_title, new_description));
+				list.editItem(item, new TodoItem(new_title, new_description, new_category, new_due_date));
 				System.out.println("항목이 변경되었습니다.");
 			}
 		}
@@ -86,8 +96,8 @@ public class TodoUtil {
 		System.out.println("총 " + len + "개의 todo 항목이 있습니다.");
 		for(int i = 0; i < len; i++) {
 			TodoItem item = list.get(i);
-			System.out.println(String.format("[%s] %s | %s",
-					item.getCurrent_date(), item.getTitle(), item.getDesc()));
+			System.out.println(String.format("%d. [%s] %s | %s - %s ~ %s",
+					i+1, item.getCategory(), item.getTitle(), item.getDesc(), item.getCurrent_date(),item.getDue_date()));
 		}
 	}
 	
@@ -114,8 +124,10 @@ public class TodoUtil {
 				String title = strtok.nextToken();
 				String desc = strtok.nextToken();
 				String date = strtok.nextToken();
+				String cate = strtok.nextToken();
+				String due = strtok.nextToken();
 				
-				TodoItem item = new TodoItem(title, desc);
+				TodoItem item = new TodoItem(title, desc, cate, due);
 				item.setCurrent_date(date);
 				l.addItem(item);
 				
