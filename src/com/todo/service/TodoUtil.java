@@ -41,18 +41,22 @@ public class TodoUtil {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("삭제할 Todo 항목을 입력하세요.");
-		System.out.print("제목 >>> ");
-		
-		String title = sc.nextLine();
-		for (TodoItem item : l.getList()) {
-			if (title.equals(item.getTitle())) {
-				l.deleteItem(item);
-				return;
-			}
+		System.out.println("삭제할 Todo 항목의 번호를 입력하세요.");
+		System.out.print(" >>> ");
+		int index = sc.nextInt();
+		sc.nextLine();
+
+		TodoItem item = l.getList().get(index-1);
+		System.out.println(String.format("%d. [%s] %s | %s - %s ~ %s",
+				index, item.getCategory(), item.getTitle(), item.getDesc(), item.getCurrent_date(),item.getDue_date()));
+		System.out.println("이 항목을 삭제하시겠습니까? (y/n)");
+		String yn = sc.nextLine();
+		if(yn.equals("y") || yn.equals("Y")) {
+			l.deleteItem(item);
+			System.out.println("항목을 삭제하였습니다.");
+			return;
 		}
-		
-		System.out.println("해당하는 Todo 항목이 존재하지 않습니다.");
+		System.out.println("취소하였습니다.");
 	}
 
 
@@ -60,18 +64,18 @@ public class TodoUtil {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("변경할 Todo 항목의 제목을 입력하세요.");
-		System.out.print("제목 >>> ");
-		String title = sc.nextLine();
-		if (!list.isDuplicate(title)) {
-			System.out.println("존재하지 않는 제목입니다!");
-			return;
-		}
+		System.out.println("변경할 Todo 항목의 번호를 입력하세요.");
+		System.out.print(" >>> ");
+		int index = sc.nextInt();
+		TodoItem item = list.getList().get(index-1);
+		System.out.println(String.format("%d. [%s] %s | %s - %s ~ %s",
+				index, item.getCategory(), item.getTitle(), item.getDesc(), item.getCurrent_date(),item.getDue_date()));
 
 		System.out.println("새로 추가할 Todo 항목을 입력하세요.");
+		sc.nextLine();
 		System.out.print("새 제목 >>> ");
 		String new_title = sc.nextLine().trim();
-		if (!title.equals(new_title) && list.isDuplicate(new_title)) {
+		if (!item.getTitle().equals(new_title) && list.isDuplicate(new_title)) {
 			System.out.println("이미 존재하는 제목입니다!");
 			return;
 		}
@@ -81,13 +85,8 @@ public class TodoUtil {
 		String new_category = sc.nextLine().trim();
 		System.out.print("새 마감일 >>> ");
 		String new_due_date = sc.nextLine().trim();
-		for (TodoItem item : list.getList()) {
-			if (item.getTitle().equals(title)) {
-				list.editItem(item, new TodoItem(new_title, new_description, new_category, new_due_date));
-				System.out.println("항목이 변경되었습니다.");
-			}
-		}
-
+		list.editItem(item, new TodoItem(new_title, new_description, new_category, new_due_date));
+		System.out.println("항목이 변경되었습니다.");
 	}
 
 	public static void listAll(TodoList l) {
