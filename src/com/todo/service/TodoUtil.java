@@ -81,7 +81,11 @@ public class TodoUtil {
 	}
 
 	public static void listAll(TodoList l) {
-		for (TodoItem item : l.getList()) {
+		ArrayList<TodoItem> list = l.getList();
+		int len = list.size();
+		System.out.println("총 " + len + "개의 todo 항목이 있습니다.");
+		for(int i = 0; i < len; i++) {
+			TodoItem item = list.get(i);
 			System.out.println(String.format("[%s] %s | %s",
 					item.getCurrent_date(), item.getTitle(), item.getDesc()));
 		}
