@@ -7,7 +7,7 @@ public class TodoItem {
     private String title;
     private String desc;
     private String current_date;
-    private SimpleDateFormat date_format = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+    private SimpleDateFormat date_format = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
 
     public TodoItem(String title, String desc){
         this.title=title;
