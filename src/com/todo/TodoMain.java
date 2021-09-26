@@ -56,6 +56,10 @@ public class TodoMain {
 				l.sortByDate();
 				isList = true;
 				break;
+				
+			case "find":
+				TodoUtil.findItem(l, sc.nextLine().trim());
+				break;
 
 			case "exit":
 				quit = true;
