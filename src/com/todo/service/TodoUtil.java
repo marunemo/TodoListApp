@@ -115,6 +115,21 @@ public class TodoUtil {
 		System.out.println("<" + keyword + "> 키워드를 지닌 총 " + count + "개의 todo 항목을 찾았습니다.");
 	}
 	
+	public static void findCategory(TodoList l, String keyword) {
+		int count = 0;		
+		ArrayList<TodoItem> list = l.getList();
+		int len = list.size();
+		for(int i = 0; i < len; i++) {
+			TodoItem item = list.get(i);
+			if(item.getCategory().contains(keyword)) {
+				System.out.println(String.format("%d. [%s] %s | %s - %s ~ %s",
+						i+1, item.getCategory(), item.getTitle(), item.getDesc(), item.getCurrent_date(),item.getDue_date()));
+				count++;
+			}
+		}
+		System.out.println("<" + keyword + "> 키워드를 지닌 총 " + count + "개의 todo 항목을 찾았습니다.");
+	}
+	
 	public static void saveList(TodoList l, String filename) {
 		try {
 			FileWriter writer = new FileWriter(filename);
