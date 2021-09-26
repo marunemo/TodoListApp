@@ -116,7 +116,7 @@ public class TodoUtil {
 	}
 	
 	public static void findCategory(TodoList l, String keyword) {
-		int count = 0;		
+		int count = 0;
 		ArrayList<TodoItem> list = l.getList();
 		int len = list.size();
 		for(int i = 0; i < len; i++) {
@@ -128,6 +128,24 @@ public class TodoUtil {
 			}
 		}
 		System.out.println("<" + keyword + "> 키워드를 지닌 총 " + count + "개의 todo 항목을 찾았습니다.");
+	}
+	
+	public static void listCategory(TodoList l) {
+		HashSet<String> s = new HashSet<String>();
+		ArrayList<TodoItem> list = l.getList();
+		int count = 0;
+		String categories = "";
+		
+		for(TodoItem item : list)
+			s.add(item.getCategory());
+		
+		for(String category : s) {
+			categories += category + " / ";
+			count++;
+		}
+		
+		System.out.println(categories.substring(0, categories.length() - 3));
+		System.out.println("총 " + count + "개의 카테고리가 등록되어 있습니다.");
 	}
 	
 	public static void saveList(TodoList l, String filename) {

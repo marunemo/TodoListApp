@@ -70,6 +70,10 @@ public class TodoMain {
 			case "find_cate":
 				TodoUtil.findCategory(l, sc.nextLine().trim());
 				break;
+				
+			case "ls_cate":
+				TodoUtil.listCategory(l);
+				break;
 
 			case "exit":
 				quit = true;
