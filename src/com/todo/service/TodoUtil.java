@@ -49,7 +49,7 @@ public class TodoUtil {
 		TodoItem item = l.getList().get(index-1);
 		System.out.println(String.format("%d. [%s] %s | %s - %s ~ %s",
 				index, item.getCategory(), item.getTitle(), item.getDesc(), item.getCurrent_date(),item.getDue_date()));
-		System.out.println("이 항목을 삭제하시겠습니까? (y/n)");
+		System.out.print("이 항목을 삭제하시겠습니까? (y/n)");
 		String yn = sc.nextLine();
 		if(yn.equals("y") || yn.equals("Y")) {
 			l.deleteItem(item);
