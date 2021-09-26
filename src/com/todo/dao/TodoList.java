@@ -39,9 +39,9 @@ public class TodoList {
 
 	public void listAll() {
 		System.out.println("\n정렬된 결과입니다.");
-		for (TodoItem myitem : list) {
-			System.out.println(String.format("[%s] %s | %s",
-					myitem.getCurrent_date(), myitem.getTitle(), myitem.getDesc()));
+		for (TodoItem item : list) {
+			System.out.println(String.format("[%s] %s | %s - %s ~ %s",
+					item.getCategory(), item.getTitle(), item.getDesc(), item.getCurrent_date(),item.getDue_date()));
 		}
 	}
 	
