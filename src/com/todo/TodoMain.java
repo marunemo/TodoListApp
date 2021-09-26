@@ -57,6 +57,12 @@ public class TodoMain {
 				isList = true;
 				break;
 				
+			case "ls_date_desc":
+				l.sortByDate();
+				l.reverseList();
+				isList = true;
+				break;
+				
 			case "find":
 				TodoUtil.findItem(l, sc.nextLine().trim());
 				break;
